@@ -11,15 +11,15 @@ const CosmicAnimation: React.FC = () => {
 
   // Souvenir/memory photos from Pexels
   const souvenirPhotos = [
-    "src/assets/20230830_163157.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
-    "src/assets/20231002_143633.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
-    "src/assets/20231101_160158.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
-    "src/assets/20231220_211036.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
-    "src/assets/ABP_7319.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
-    "src/assets/Screenshot_20230904_152611_WhatsApp.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
-    "src/assets/Screenshot_20230904_152813_WhatsApp.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
-    "src/assets/Snapchat-598637206.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
-    "src/assets/Snapchat-1199494045.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+    "/assets/20230830_163157.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+    "/assets/20231002_143633.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+    "/assets/20231101_160158.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+    "/assets/20231220_211036.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+    "/assets/ABP_7319.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+    "/assets/Screenshot_20230904_152611_WhatsApp.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+    "/assets/Screenshot_20230904_152813_WhatsApp.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+    "/assets/Snapchat-598637206.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+    "/assets/Snapchat-1199494045.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
   ];
 
   useEffect(() => {
@@ -131,7 +131,7 @@ const CosmicAnimation: React.FC = () => {
 
   return (
     <div className="fixed inset-0 bg-black overflow-hidden">
-      <audio autoPlay loop src="/src/assets/amour.mp3" />
+      <audio autoPlay loop src="/assets/amour.mp3" />
       {/* Deep space background with mystery */}
       <div
         className="absolute inset-0"
@@ -153,7 +153,7 @@ const CosmicAnimation: React.FC = () => {
       {/* Galaxy PNG background (smaller and more subtle) */}
       <div className="absolute inset-0 flex items-center justify-center opacity-90">
         <img
-          src="/src/assets/galaxy.png"
+          src="/assets/galaxy.png"
           alt="Galaxy"
           className="w-1/2 h-1/2 object-contain animate-pulse"
         />
@@ -253,7 +253,7 @@ const CosmicAnimation: React.FC = () => {
           {/* 🎞️ Background avec gif romantique flou */}
           <div className="absolute inset-0 overflow-hidden">
             <img
-              src="/src/assets/love-background.gif" // remplace par ton gif
+              src="/assets/love-background.gif" // remplace par ton gif
               alt="Romantic Background"
               className="w-full h-full object-cover opacity-60 blur-md scale-110"
             />
