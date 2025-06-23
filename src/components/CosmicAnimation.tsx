@@ -21,17 +21,21 @@ const CosmicAnimation: React.FC = () => {
     "/assets/Snapchat-598637206.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
     "/assets/Snapchat-1199494045.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
   ];
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % souvenirPhotos.length);
+  };
 
   useEffect(() => {
     const timeline = [
       // Start zoom out immediately after 2 seconds
       {
-        delay: 4000,
+        delay: 900,
         action: () => setAnimationPhase({ phase: "zoom-out" }),
       },
       // Galaxy formation (6 seconds)
       {
-        delay: 6000,
+        delay: 4000,
         action: () => setAnimationPhase({ phase: "galaxy" }),
       },
       // Message appears (10 seconds)
@@ -111,7 +115,7 @@ const CosmicAnimation: React.FC = () => {
       { x: 50, y: 40 }, // Centre exact
     ];
   };
-  
+
   const getGalaxyPositions = () => {
     // Spiral galaxy formation positions (tighter spiral)
     const centerX = 50;
@@ -155,7 +159,7 @@ const CosmicAnimation: React.FC = () => {
         <img
           src="/assets/galaxy.png"
           alt="Galaxy"
-          className="w-1/2 h-1/2 object-contain animate-pulse"
+          className="  object-contain animate-pulse"
         />
       </div>
       {/* Souvenir photos with fluid zoom-out */}
@@ -249,11 +253,11 @@ const CosmicAnimation: React.FC = () => {
       )}
       {/* Message phase */}
       {animationPhase.phase === "message" && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center">
-          {/* 🎞️ Background avec gif romantique flou */}
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 pt-8 sm:pt-12 space-y-6">
+          {/* 🎞️ Background GIF flou */}
           <div className="absolute inset-0 overflow-hidden">
             <img
-              src="/assets/love-background.gif" // remplace par ton gif
+              src="/assets/love-background.gif"
               alt="Romantic Background"
               className="w-full h-full object-cover opacity-60 blur-md scale-110"
             />
@@ -261,9 +265,9 @@ const CosmicAnimation: React.FC = () => {
           </div>
 
           {/* 💬 Texte émotionnel */}
-          <div className="text-center space-y-8 px-8">
+          <div className="text-center space-y-5 max-w-[90%] sm:max-w-[600px]">
             <p
-              className="text-2xl md:text-3xl text-pink-200 font-light leading-relaxed opacity-0 animate-fade-in-delayed"
+              className="text-base sm:text-xl md:text-2xl text-pink-200 font-light leading-relaxed opacity-0 animate-fade-in-delayed"
               style={{
                 textShadow:
                   "0 0 20px rgba(255, 192, 203, 0.7), 0 0 40px rgba(255, 182, 193, 0.4)",
@@ -273,14 +277,14 @@ const CosmicAnimation: React.FC = () => {
             >
               Purce, malgré tout, tu resteras une étoile dans mon ciel.
               <br />
-              Je sais que tu as merdé...
+              Je sais que tu as merdé...{" "}
               <span className="font-semibold text-white">
                 mais je ne regretterai jamais de t’avoir aimé.
               </span>
             </p>
 
             <p
-              className="text-xl md:text-2xl text-white font-light leading-relaxed opacity-0 animate-fade-in-delayed"
+              className="text-sm sm:text-lg md:text-xl text-white font-light leading-relaxed opacity-0 animate-fade-in-delayed"
               style={{
                 textShadow:
                   "0 0 25px rgba(255, 255, 255, 0.8), 0 0 50px rgba(255, 182, 193, 0.3)",
@@ -296,6 +300,55 @@ const CosmicAnimation: React.FC = () => {
                 à m'aimer.
               </span>
             </p>
+          </div>
+
+          {/* 📸 Slider romantique */}
+          <div className="relative w-[260px] h-[320px] sm:w-[320px] sm:h-[380px] md:w-[400px] md:h-[460px] mt-6">
+            {souvenirPhotos.map((photo, index) => {
+              const offset = index - currentSlide;
+              if (Math.abs(offset) > 2) return null;
+
+              const scale = offset === 0 ? 1 : 0.9;
+              const translateX = offset * 40;
+              const translateY = offset === 0 ? "0px" : "16px";
+              const blur = offset === 0 ? "blur-0" : "blur-[2px]";
+              const zIndex = offset === 0 ? 30 : 20 - Math.abs(offset);
+              const border =
+                offset === 0
+                  ? "3px solid rgba(255,182,193,0.8)"
+                  : "1px solid rgba(255,255,255,0.08)";
+
+              return (
+                <img
+                  key={index}
+                  src={photo}
+                  alt={`Memory ${index + 1}`}
+                  className={`absolute top-0 left-1/2 transform 
+                  -translate-x-1/2 rounded-xl object-cover 
+                  transition-all duration-700 ease-in-out shadow-xl ${blur}`}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    scale,
+                    zIndex,
+                    transform: `translateX(${translateX}px) translateY(${translateY}) scale(${scale})`,
+                    border,
+                    cursor: offset === 0 ? "pointer" : "default",
+                    boxShadow:
+                      offset === 0
+                        ? "0 0 50px rgba(255,182,193,0.6)"
+                        : "0 0 12px rgba(255,255,255,0.1)",
+                  }}
+                  onClick={() => {
+                    if (offset !== 0) {
+                      setCurrentSlide(index);
+                    } else {
+                      handleNextSlide();
+                    }
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
       )}
